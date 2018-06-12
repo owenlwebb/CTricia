@@ -14,6 +14,7 @@ CTricia::CTricia() {
 }
 
 CTricia::node * CTricia::insert(string &ip) {
+
     return nullptr;
 }
 
@@ -29,10 +30,35 @@ CTricia::~CTricia() {
 
 }
 
-pair<bitset<32>, int> CTricia::toBits(string &ip) {
-    return {};
+CTricia::node * CTricia::makeNode(string &ip) {
+    node * newNode = new node;
+
+    //1, 2, or 0 digit prefix
+    if (ip[ip.length() - 2] == '/') {
+        newNode->prefix = stoi(ip.substr(ip.length() - 1));
+    }
+    else if (ip[ip.length() - 3] == '/') {
+        newNode->prefix = stoi(ip.substr(ip.length() - 2));
+    }
+    else {
+        newNode->prefix = 32;
+    }
+
+    //convert octets to bits
+    stringstream ss(ip);
+    string octetStr = "";
+    int octetInt = 0;
+    bitset<32> bits;
+
+    for (int i = 0; i < 4; ++i) {
+        getline(ss, octetStr, '.');
+        octetInt = stoi(octetStr);
+
+        bits |= (octetInt << (24 - (8 * i)));
+    }
+
+    newNode->left = newNode->right = nullptr;
+
+    return newNode;
 }
 
-string CTricia::toIP(CTricia::node * n) {
-    return {};
-}
