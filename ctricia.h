@@ -1,8 +1,8 @@
 #pragma once
 /*
 * Header file for CTricia
-* 
-* CTricia: A C++ Implementation of a PATRICIA tree for IP Address Operations
+*
+* CTricia: A C++ Implementation of a PATRICIA trie for IP Address Operations
 * Author: Owen Webb - owebb@umich.edu
 */
 
@@ -20,7 +20,7 @@ private:
         node * right;
     };
 
-//interface
+    //interface
 public:
     CTricia();
     node * insert(std::string &ip);
@@ -35,12 +35,12 @@ public:
     // DESCRIPTION: Destructor
     ~CTricia();
 
-//helpers
+    //helpers
 private:
-    std::pair<std::bitset<32>, unsigned char> toBits(std::string &ip);
+    std::pair<std::bitset<32>, int> toBits(std::string &ip);
     std::string toIP(node * n);
 
-//data
+    //data
 private:
-    node root = { {}, -1, nullptr, nullptr };
+    node * root = nullptr;
 };
