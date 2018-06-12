@@ -10,14 +10,17 @@
 using namespace std;
 
 CTricia::CTricia() {
-    string rootIP = "0.0.0.0";
+    string rootIP = "0.0.0.0/0";
     root = makeNode(rootIP);
-    root->prefix = -1;
 }
 
 void CTricia::insert(string &ip) {
+    node * newNode = makeNode(ip);
+    assert(newNode->prefix != 0); //not allowed
+    node * curr = root;
 
-    return;
+    recurseAndInsert(curr, newNode);
+
 }
 
 void CTricia::remove(string &ip) {
@@ -72,4 +75,23 @@ void CTricia::destroyTree(node * n) {
     destroyTree(n->right);
 
     delete n;
+}
+
+void CTricia::recurseAndInsert(node * curr, node * n) {
+
+    if (newNode->data[newNode->prefix] == 0) {
+
+    }
+    else {
+
+    }
+
+
+
+    //if here that means that up until the prefix of the current node,
+    //the bits are EXACTLY the same
+
+    //find point where they diverge and insert left or right depending on 
+    //whether the diverging bit is a 0 or 1 and as long as the node
+    //below has a greater prefix.
 }
