@@ -10,12 +10,14 @@
 using namespace std;
 
 CTricia::CTricia() {
-
+    string rootIP = "0.0.0.0";
+    root = makeNode(rootIP);
+    root->prefix = -1;
 }
 
-CTricia::node * CTricia::insert(string &ip) {
+void CTricia::insert(string &ip) {
 
-    return nullptr;
+    return;
 }
 
 void CTricia::remove(string &ip) {
@@ -57,6 +59,7 @@ CTricia::node * CTricia::makeNode(string &ip) {
         bits |= (octetInt << (24 - (8 * i)));
     }
 
+    newNode->data = bits;
     newNode->left = newNode->right = nullptr;
 
     return newNode;

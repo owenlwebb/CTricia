@@ -24,7 +24,7 @@ private:
     //interface
 public:
     CTricia();
-    node * insert(std::string &ip);
+    void insert(std::string &ip);
     void remove(std::string &ip);
 
     // DESCRIPTION: Returns "true" if IP is covered under some prefix within
