@@ -8,6 +8,7 @@
 
 #include <string>
 #include <bitset>
+#include <sstream>
 
 class CTricia {
 //struct delcarations
@@ -37,8 +38,7 @@ public:
 
     //helpers
 private:
-    std::pair<std::bitset<32>, int> toBits(std::string &ip);
-    std::string toIP(node * n);
+    node * makeNode(std::string &ip);
 
     //data
 private:
