@@ -39,6 +39,7 @@ public:
     //helpers
 private:
     node * makeNode(std::string &ip);
+    void destroyTree(node * n);
 
     //data
 private:

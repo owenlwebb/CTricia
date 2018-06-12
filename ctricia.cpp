@@ -29,7 +29,7 @@ bool CTricia::contains(string &ip) {
 }
 
 CTricia::~CTricia() {
-
+    CTricia::destroyTree(root);
 }
 
 CTricia::node * CTricia::makeNode(string &ip) {
@@ -65,3 +65,11 @@ CTricia::node * CTricia::makeNode(string &ip) {
     return newNode;
 }
 
+void CTricia::destroyTree(node * n) {
+    if (n == nullptr) return;
+
+    destroyTree(n->left);
+    destroyTree(n->right);
+
+    delete n;
+}
