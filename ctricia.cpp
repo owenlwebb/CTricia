@@ -31,8 +31,21 @@ void CTricia::remove(const string ip) {
     return;
 }
 
-bool CTricia::contains(const string &ip) {
-    return 1;
+bool CTricia::contains(const string ip) {
+    node * search = makeNode(ip);
+    bool val = 0;
+
+    if (search->prefix == 0)
+        throw invalid_argument("prefix \"0\" not allowed!");
+
+    //go left or right
+    if (search->data[0] == 0)
+        val = inSubtree(root, search, root->left);
+    else
+        val = inSubtree(root, search, root->right);
+
+    delete search;
+    return val;
 }
 
 CTricia::~CTricia() {
@@ -149,4 +162,9 @@ int CTricia::findDivergeIndex(const std::bitset<32> &b1, const std::bitset<32> &
     }
 
     return prefix;
+}
+
+bool CTricia::inSubtree(node * curr, node * search, node * below) {
+
+
 }

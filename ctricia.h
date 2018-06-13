@@ -32,7 +32,7 @@ public:
     //              the trie. Return "false" otherwise. 
     // REQUIRES: IP is a string formatted as a full IP address of the form
     //           XXX.XXX.XXX.XXX
-    bool contains(const std::string &ip);
+    bool contains(const std::string ip);
 
     // DESCRIPTION: Destructor
     ~CTricia();
@@ -41,8 +41,9 @@ public:
 private:
     node * makeNode(const std::string &ip);
     void destroyTree(node * n);
-    void insertInSubtree(node * curr, node * n, node * &below);
+    void insertInSubtree(node * curr, node * newNode, node * &below);
     int findDivergeIndex(const std::bitset<32> &b1, const std::bitset<32> &b2, const int prefix);
+    bool inSubtree(node * curr, node * search, node * below);
 
 //data
 private:
