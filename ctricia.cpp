@@ -81,22 +81,6 @@ void CTricia::destroyTree(node * n) {
     delete n;
 }
 
-/*
-LOGIC:
-    if below has a smaller prefix than newNode
-        if the bits match up until the below's prefix 
-            recurse
-        otherwise
-            make a new node with a prefix corresponding to the index
-            where the bits diverge. Set left/right accordingly
-    if below has greater prefix than newNode
-        if the bits all match up until newNode's prefix
-            insert now. Make below newNode and set the original below wherever
-            appropriate depending on its bit at newNode's diverging index
-        otherwise
-            make a new node with a prefix corresponding to the index 
-            where the bits diverge. Set left/right accordingly
-*/
 void CTricia::insertInSubtree(node * curr, node * newNode, node * &below) {
     assert(!(curr->prefix > newNode->prefix)); //bad
     int div;
@@ -136,6 +120,10 @@ void CTricia::insertInSubtree(node * curr, node * newNode, node * &below) {
             return;
         }
     }
+    //already exists
+    else {
+        return;
+    }
 
     //prefixes diverge. Combine below and newNode under a shared parent
     node * sharedParent = new node;
@@ -154,12 +142,6 @@ void CTricia::insertInSubtree(node * curr, node * newNode, node * &below) {
     below = sharedParent;
 }
 
+int CTricia::findDivergeIndex(std::bitset<32> b1, std::bitset<32> b2, int prefix) {
 
-
-    //if here that means that up until the prefix of the current node,
-    //the bits are EXACTLY the same
-
-    //find point where they diverge and insert left or right depending on 
-    //whether the diverging bit is a 0 or 1 and as long as the node
-    //below has a greater prefix.
 }
