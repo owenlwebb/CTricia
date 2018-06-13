@@ -16,11 +16,15 @@ CTricia::CTricia() {
 
 void CTricia::insert(string &ip) {
     node * newNode = makeNode(ip);
-    assert(newNode->prefix != 0); //not allowed
-    node * curr = root;
 
-    recurseAndInsert(curr, newNode);
+    if (newNode->prefix == 0)
+        throw invalid_argument("prefix \"0\" not allowed!");
 
+    //go left or right
+    if (newNode->data[0] == 0)
+        insertInSubtree(root, newNode, root->left);
+    else
+        insertInSubtree(root, newNode, root->right);
 }
 
 void CTricia::remove(string &ip) {
@@ -77,14 +81,78 @@ void CTricia::destroyTree(node * n) {
     delete n;
 }
 
-void CTricia::recurseAndInsert(node * curr, node * n) {
+/*
+LOGIC:
+    if below has a smaller prefix than newNode
+        if the bits match up until the below's prefix 
+            recurse
+        otherwise
+            make a new node with a prefix corresponding to the index
+            where the bits diverge. Set left/right accordingly
+    if below has greater prefix than newNode
+        if the bits all match up until newNode's prefix
+            insert now. Make below newNode and set the original below wherever
+            appropriate depending on its bit at newNode's diverging index
+        otherwise
+            make a new node with a prefix corresponding to the index 
+            where the bits diverge. Set left/right accordingly
+*/
+void CTricia::insertInSubtree(node * curr, node * newNode, node * &below) {
+    assert(!(curr->prefix > newNode->prefix)); //bad
+    int div;
 
-    if (newNode->data[newNode->prefix] == 0) {
+    //below doesn't exist
+    if (below == nullptr) {
+        below = newNode;
+        return;
+    }
+    //below is less specific
+    else if (below->prefix < newNode->prefix) {
+        div = findDivergeIndex(below->data, newNode->data, below->prefix);
 
+        //below prefixed bits are same. Go deeper
+        if (div == below->prefix) {
+            if (newNode->data[below->prefix] == 0)
+                insertInSubtree(below, newNode, below->left);
+            else
+                insertInSubtree(below, newNode, below->right);
+        }
+    }
+    //below is more specific
+    else if (below->prefix > newNode->prefix) {
+        div = findDivergeIndex(below->data, newNode->data, newNode->prefix);
+
+        //below prefixed bits are same. Insert here
+        if (div == below->prefix) {
+            if (below->data[newNode->prefix] == 0) {
+                newNode->left = below;
+                newNode->right = nullptr;
+            }
+            else {
+                newNode->left = nullptr;
+                newNode->right = below;
+            }
+            below = newNode;
+            return;
+        }
+    }
+
+    //prefixes diverge. Combine below and newNode under a shared parent
+    node * sharedParent = new node;
+    sharedParent->prefix = div;
+    sharedParent->data = newNode->data;
+
+    if (newNode->data[div] == 0) {
+        sharedParent->left = newNode;
+        sharedParent->right = below;
     }
     else {
-
+        sharedParent->right = newNode;
+        sharedParent->left = below;
     }
+
+    below = sharedParent;
+}
 
 
 

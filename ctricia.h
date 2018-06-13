@@ -10,6 +10,7 @@
 #include <bitset>
 #include <sstream>
 #include <cassert>
+#include <stdexcept>
 
 class CTricia {
 //struct delcarations
@@ -41,7 +42,7 @@ public:
 private:
     node * makeNode(std::string &ip);
     void destroyTree(node * n);
-    void recurseAndInsert(node * curr, node * n);
+    void insertInSubtree(node * curr, node * n, node * &below);
 
     //data
 private:
