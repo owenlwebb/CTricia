@@ -15,7 +15,6 @@
 class CTricia {
 //struct delcarations
 private:
-    //node declaration
     struct node {
         std::bitset<32> data;
         int prefix;
@@ -23,11 +22,11 @@ private:
         node * right;
     };
 
-    //interface
+//interface
 public:
     CTricia();
-    void insert(std::string &ip);
-    void remove(std::string &ip);
+    void insert(std::string ip);
+    void remove(std::string ip);
 
     // DESCRIPTION: Returns "true" if IP is covered under some prefix within
     //              the trie. Return "false" otherwise. 
@@ -38,14 +37,15 @@ public:
     // DESCRIPTION: Destructor
     ~CTricia();
 
-    //helpers
+//helpers
 private:
     node * makeNode(std::string &ip);
     void destroyTree(node * n);
     void insertInSubtree(node * curr, node * n, node * &below);
     int findDivergeIndex(std::bitset<32> b1, std::bitset<32> b2, int prefix);
 
-    //data
+//data
 private:
     node * root = nullptr;
+    size_t size = 0;
 };
