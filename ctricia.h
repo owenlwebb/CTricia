@@ -43,6 +43,7 @@ private:
     node * makeNode(std::string &ip);
     void destroyTree(node * n);
     void insertInSubtree(node * curr, node * n, node * &below);
+    int findDivergeIndex(std::bitset<32> b1, std::bitset<32> b2, int prefix);
 
     //data
 private:
