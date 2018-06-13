@@ -25,24 +25,24 @@ private:
 //interface
 public:
     CTricia();
-    void insert(std::string ip);
-    void remove(std::string ip);
+    void insert(const std::string ip);
+    void remove(const std::string ip);
 
     // DESCRIPTION: Returns "true" if IP is covered under some prefix within
     //              the trie. Return "false" otherwise. 
     // REQUIRES: IP is a string formatted as a full IP address of the form
     //           XXX.XXX.XXX.XXX
-    bool contains(std::string &ip);
+    bool contains(const std::string &ip);
 
     // DESCRIPTION: Destructor
     ~CTricia();
 
 //helpers
 private:
-    node * makeNode(std::string &ip);
+    node * makeNode(const std::string &ip);
     void destroyTree(node * n);
     void insertInSubtree(node * curr, node * n, node * &below);
-    int findDivergeIndex(std::bitset<32> b1, std::bitset<32> b2, int prefix);
+    int findDivergeIndex(const std::bitset<32> &b1, const std::bitset<32> &b2, const int prefix);
 
 //data
 private:

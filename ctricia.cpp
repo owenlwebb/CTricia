@@ -14,7 +14,7 @@ CTricia::CTricia() {
     root = makeNode(rootIP);
 }
 
-void CTricia::insert(string ip) {
+void CTricia::insert(const string ip) {
     node * newNode = makeNode(ip);
 
     if (newNode->prefix == 0)
@@ -27,11 +27,11 @@ void CTricia::insert(string ip) {
         insertInSubtree(root, newNode, root->right);
 }
 
-void CTricia::remove(string ip) {
+void CTricia::remove(const string ip) {
     return;
 }
 
-bool CTricia::contains(string &ip) {
+bool CTricia::contains(const string &ip) {
     return 1;
 }
 
@@ -39,7 +39,7 @@ CTricia::~CTricia() {
     CTricia::destroyTree(root);
 }
 
-CTricia::node * CTricia::makeNode(string &ip) {
+CTricia::node * CTricia::makeNode(const string &ip) {
     node * newNode = new node;
 
     //1, 2, or 0 digit prefix
@@ -142,7 +142,7 @@ void CTricia::insertInSubtree(node * curr, node * newNode, node * &below) {
     below = sharedParent;
 }
 
-int CTricia::findDivergeIndex(std::bitset<32> b1, std::bitset<32> b2, int prefix) {
+int CTricia::findDivergeIndex(const std::bitset<32> &b1, const std::bitset<32> &b2, const int prefix) {
     for (int i = 0; i < prefix; ++i) {
         if (b1[i] != b2[i])
             return i;
